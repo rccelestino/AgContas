@@ -75,6 +75,7 @@ public class Logradouro implements Serializable {
     private Date DataAlteracao;
 
     public Logradouro() {
+        this.tipologradouro = new TipoLogradouro();
         this.bairro = new Bairro();
         this.cidade = new Cidade();
         this.uf = new Uf();
