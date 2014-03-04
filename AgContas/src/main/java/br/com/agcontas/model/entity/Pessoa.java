@@ -52,7 +52,7 @@ public class Pessoa implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date DataAlteracao;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
     private List<Email> emails;
     
     @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
