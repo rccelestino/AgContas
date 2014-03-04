@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,8 +52,12 @@ public class Pessoa implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date DataAlteracao;
 
-    @OneToMany(mappedBy = "Pessoa")
+    @OneToMany(mappedBy = "id")
     private List<Email> emails;
+    
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    private List<Logradouro> logradouros;
+    
     
     public Pessoa() {
 
@@ -128,6 +133,14 @@ public class Pessoa implements Serializable {
 
     public void setEmails(List<Email> emails) {
         this.emails = emails;
+    }
+
+    public List<Logradouro> getLogradouros() {
+        return logradouros;
+    }
+
+    public void setLogradouros(List<Logradouro> logradouros) {
+        this.logradouros = logradouros;
     }
 
     @Override

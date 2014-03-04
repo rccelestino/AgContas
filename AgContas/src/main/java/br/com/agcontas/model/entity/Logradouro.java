@@ -49,6 +49,10 @@ public class Logradouro implements Serializable {
     private Integer Cep;
     
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    private Pessoa pessoa;
+    
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "uf_id", referencedColumnName = "id")
     private Uf uf;
     
