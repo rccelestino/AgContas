@@ -53,6 +53,10 @@ public class Logradouro implements Serializable {
     private Pessoa pessoa;
     
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "TipoRua_id", referencedColumnName = "id")
+    private TipoLogradouro tipologradouro;
+    
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "uf_id", referencedColumnName = "id")
     private Uf uf;
     
