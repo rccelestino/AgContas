@@ -2,11 +2,14 @@ package br.com.agcontas.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -18,38 +21,41 @@ import javax.persistence.Temporal;
 @Table(name = "Pessoa")
 
 public class Pessoa implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
-    
-    @Column(name="id", nullable=false)    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "id", nullable = false)
     private Integer idPessoa;
-    
-    @Column(name="tipopessoa_id",length = 1, nullable = false)
+
+    @Column(name = "tipopessoa_id", length = 1, nullable = false)
     private Integer TipoPessoa;
-    
-    @Column(name="cnpjcpf", length = 14, nullable = false, unique = true)
+
+    @Column(name = "cnpjcpf", length = 14, nullable = false, unique = true)
     private String CNPJCPF;
-    
-    @Column(name="nomerazao", length= 100, nullable = false)
+
+    @Column(name = "nomerazao", length = 100, nullable = false)
     private String NomeRazao;
-    
-    @Column(name="nomefantasia", length= 100, nullable = false)
+
+    @Column(name = "nomefantasia", length = 100, nullable = false)
     private String NomeFantasia;
-    
-    @Column(name="ativoouinativo",length = 1, nullable = false)
+
+    @Column(name = "ativoouinativo", length = 1, nullable = false)
     private String AtivoOuInativo;
-   
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date DataCriacao;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date DataAlteracao;
 
+    @OneToMany(mappedBy = "Pessoa")
+    private List<Email> emails;
+    
     public Pessoa() {
-        
+
     }
 
     public Integer getIdPessoa() {
@@ -116,6 +122,14 @@ public class Pessoa implements Serializable {
         this.DataAlteracao = DataAlteracao;
     }
 
+    public List<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(List<Email> emails) {
+        this.emails = emails;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -138,7 +152,4 @@ public class Pessoa implements Serializable {
         return true;
     }
 
-    
-    
-    
 }
